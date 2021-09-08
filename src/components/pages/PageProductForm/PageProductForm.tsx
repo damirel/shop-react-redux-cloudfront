@@ -120,7 +120,7 @@ export default function PageProductForm() {
     }
     axios.get(`${API_PATHS.bff}/products/${id}`)
       .then(res => {
-        setProduct(res.data);
+        setProduct(res.data.products);
         setIsLoading(false);
       });
   }, [id])
