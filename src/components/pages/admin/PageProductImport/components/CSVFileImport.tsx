@@ -30,10 +30,14 @@ export default function CSVFileImport({url, title}: CSVFileImportProps) {
   };
 
   const uploadFile = async (e: any) => {
+    const authorizationToken = localStorage.getItem('authorization_token');
+    const headers = authorizationToken ? { Authorization: `Basic ${authorizationToken}` } : {};
+    console.log('AuthorizationToken: ', authorizationToken);
       // Get the presigned URL
       const response = await axios({
         method: 'GET',
         url,
+        headers: headers,
         params: {
           name: encodeURIComponent(file.name)
         }
@@ -46,8 +50,7 @@ export default function CSVFileImport({url, title}: CSVFileImportProps) {
       })
       console.log('Result: ', result)
       setFile('');
-    }
-  ;
+    };
 
   return (
     <div className={classes.content}>
